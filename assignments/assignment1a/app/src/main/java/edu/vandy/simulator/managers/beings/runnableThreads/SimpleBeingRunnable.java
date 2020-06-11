@@ -3,6 +3,7 @@ package edu.vandy.simulator.managers.beings.runnableThreads;
 import edu.vandy.simulator.managers.beings.Being;
 import edu.vandy.simulator.managers.beings.BeingManager;
 import edu.vandy.simulator.managers.palantiri.Palantir;
+import edu.vandy.simulator.managers.palantiri.PalantiriManager;
 
 /**
  * This class implements the gazing logic for a being that's
@@ -48,5 +49,15 @@ public class SimpleBeingRunnable
         // for this being via a call to the appropriate Being super
         // class helper method.
         // TODO -- you fill in here.
+        Palantir p = acquirePalantir();
+        //Being being = mManager.getBeing(p.getId());
+        if (p != null ) {
+            Being being = mManager.getBeing(p.getId());
+            p.gaze(being);
+            releasePalantir(p);
+
+        } else{
+            super.error("Not able to acquire Palantir");
+        }
     }
 }
